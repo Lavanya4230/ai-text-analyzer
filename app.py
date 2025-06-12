@@ -4,6 +4,7 @@ from summa.summarizer import summarize
 from summa import keywords
 from textblob import TextBlob
 import spacy
+import subprocess
 import langdetect
 from gtts import gTTS
 import os
@@ -18,7 +19,13 @@ import base64
 
 # Download dependencies
 nltk.download('punkt')
-nlp = spacy.load("en_core_web_sm")
+
+# Download spacy model if not present
+try:
+    nlp = spacy.load("en_core_web_sm")
+except OSError:
+    subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"])
+    nlp = spacy.load("en_core_web_sm")
 
 # Helper functions
 def extract_text_from_pdf(uploaded_file):
