@@ -21,11 +21,6 @@ import base64
 nltk.download('punkt')
 
 # Download spacy model if not present
-try:
-    nlp = spacy.load("en_core_web_sm")
-except OSError:
-    subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"])
-    nlp = spacy.load("en_core_web_sm")
 
 # Helper functions
 def extract_text_from_pdf(uploaded_file):
